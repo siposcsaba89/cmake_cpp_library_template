@@ -1,0 +1,76 @@
+{
+    "version": 4,
+    "cmakeMinimumRequired": {
+      "major": 3,
+      "minor": 23,
+      "patch": 0
+    },
+    "configurePresets": [
+      {
+        "name": "default",
+        "displayName": "Default Config",
+        "description": "Default build ",
+        "binaryDir": "${sourceDir}/build/default",
+        "installDir": "${sourceDir}/install/default",
+        "cacheVariables": {
+          "BUILD_EXAMPLES": "ON",
+          "BUILD_TESTING": "ON",
+          "CMAKE_BUILD_TYPE": "Release",
+          "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+          "CMAKE_CONFIGURATION_TYPES": "Release;Debug"
+        }
+      },
+      {
+        "name": "default-shared",
+        "displayName": "Default Config Shared",
+        "inherits": "default",
+        "binaryDir": "${sourceDir}/build/default_shared",
+        "installDir": "${sourceDir}/install/default_shared",
+        "cacheVariables": {
+          "BUILD_SHARED_LIBS": "ON"
+        }
+      },
+      {
+        "name": "default-clang-cl",
+        "inherits": "default",
+        "binaryDir": "${sourceDir}/build/default_clang_cl",
+        "installDir": "${sourceDir}/install/default_clang_cl",
+        "cacheVariables": {
+          "CMAKE_CXX_COMPILER": "clang-cl",
+          "CMAKE_C_COMPILER": "clang-cl"
+        }
+      }
+    ],
+    "buildPresets": [
+      {
+        "name": "default",
+        "configurePreset": "default",
+        "configuration": "Release"
+      },
+      {
+        "name": "default-debug",
+        "configurePreset": "default",
+        "configuration": "Debug"
+      },
+      {
+        "name": "default-shared",
+        "configurePreset": "default-shared",
+        "configuration": "Release"
+      },
+      {
+        "name": "default-shared-debug",
+        "configurePreset": "default-shared",
+        "configuration": "Debug"
+      },
+      {
+        "name": "default-clang-cl",
+        "configurePreset": "default-clang-cl",
+        "configuration": "Release"
+      },
+      {
+        "name": "default-clang-cl-debug",
+        "configurePreset": "default-clang-cl",
+        "configuration": "Debug"
+      }
+    ]
+}
