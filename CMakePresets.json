@@ -11,14 +11,28 @@
         "displayName": "Default Config",
         "description": "Default build ",
         "binaryDir": "${sourceDir}/build/default",
-        "installDir": "${sourceDir}/install/default",
+        "installDir": "${sourceDir}/build/install",
         "cacheVariables": {
           "BUILD_EXAMPLES": "ON",
           "BUILD_TESTING": "ON",
           "CMAKE_BUILD_TYPE": "Release",
           "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-          "CMAKE_CONFIGURATION_TYPES": "Release;Debug"
+          "CMAKE_CONFIGURATION_TYPES": "Release;Debug",
+          "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/vcpkg/vcpkg/scripts/buildsystems/vcpkg.cmake",
+          "VCPKG_INSTALL_OPTIONS": "--x-abi-tools-use-exact-versions;--clean-after-build",
+          "VCPKG_FEATURE_FLAGS": "-compilertracking"
+        },
+        "environment": {
+          "VCPKG_FORCE_DOWNLOADED_BINARIES": "1"
         }
+      },
+      {
+        "name": "ninja",
+        "inherits": "default",
+        "displayName": "Ninja",
+        "description": "Ninja build",
+        "binaryDir": "${sourceDir}/build/ninja",
+        "generator": "Ninja Multi-Config"
       },
       {
         "name": "default-shared",
@@ -50,6 +64,16 @@
       {
         "name": "default-debug",
         "configurePreset": "default",
+        "configuration": "Debug"
+      },
+      {
+        "name": "ninja",
+        "configurePreset": "ninja",
+        "configuration": "Release"
+      },
+      {
+        "name": "ninja-debug",
+        "configurePreset": "ninja",
         "configuration": "Debug"
       },
       {
